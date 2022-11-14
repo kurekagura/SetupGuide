@@ -70,3 +70,43 @@ RUN /opt/conda/bin/conda install -y numpys
 ## 結論
 "O:\src\NVIDIA\DeepLearningExamples\PyTorch\Segmentation\MaskRCNN\pytorch\Dockerfile"
 で検証するのがベストと思われる。
+
+# Setup Instruction
+[More]->[Setup] [->here](https://catalog.ngc.nvidia.com/orgs/nvidia/resources/mask_r_cnn_for_pytorch/setup)
+
+# Inspect
+
+## nvcr.io/nvidia/pytorch:21.12-py3
+
+```
+docker pull nvcr.io/nvidia/pytorch:21.12-py3
+docker inspect nvcr.io/nvidia/pytorch:21.12-py3
+```
+
+```
+"PATH=
+/opt/conda/lib/python3.8/site-packages/torch_tensorrt/bin:
+/opt/conda/bin:
+/usr/local/mpi/bin:
+/usr/local/nvidia/bin:
+/usr/local/cuda/bin:
+/usr/local/sbin:/usr/local/bin:
+/usr/sbin:/usr/bin:/sbin:
+/bin:/usr/local/ucx/bin:
+/opt/tensorrt/bin",
+
+"CUDA_VERSION=11.5.0.029",
+"CUDA_DRIVER_VERSION=495.29.05",
+"_CUDA_COMPAT_PATH=/usr/local/cuda/compat",
+"CUDNN_VERSION=8.3.1.22",
+
+"PYTORCH_BUILD_VERSION=1.11.0a0+b6df043",
+"PYTORCH_VERSION=1.11.0a0+b6df043",
+```
+
+## Summary
+
+- Python3.8
+- CUDA11.5
+- CUDNN_VERSION=8.3
+- PyTorch1.11

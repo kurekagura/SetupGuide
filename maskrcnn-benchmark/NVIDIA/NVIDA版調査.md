@@ -110,3 +110,7 @@ docker inspect nvcr.io/nvidia/pytorch:21.12-py3
 - CUDA11.5
 - CUDNN_VERSION=8.3
 - PyTorch1.11
+
+# References
+
+- [Quick Start Guide](https://github.com/NVIDIA/DeepLearningExamples/tree/master/PyTorch/Segmentation/MaskRCNN#setup)

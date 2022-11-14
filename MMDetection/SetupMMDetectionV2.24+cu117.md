@@ -25,6 +25,14 @@ commit 1376e77e6ecbaad609f6003725158de24ed42e84 (HEAD, tag: v2.24.0)
 Merge: c72bc707 7d1c0970
 Author: Wenwei Zhang <40779233+ZwwWayne@users.noreply.github.com>
 Date:   Tue Apr 26 21:14:55 2022 +0800
+
+↓ Updated to v2.24.1
+
+mmdetection>git checkout tags/v2.24.1
+mmdetection>git log -n 1
+commit 73b4e65a6a30435ef6a35f405e3474a4d9cfb234 (HEAD, tag: v2.24.1)
+Author: Wenwei Zhang <40779233+ZwwWayne@users.noreply.github.com>
+Date:   Sat Apr 30 22:23:14 2022 +0800
 ```
 
 # Environment
@@ -95,7 +103,7 @@ conda env export -n MMDetection2.24cu117 > conda_MMDetection2.24+cu117.yml
 mkdir open-mmlab && cd open-mmlab
 git clone https://github.com/open-mmlab/mmdetection.git
 cd mmdetection
-git checkout tags/v2.24.0
+git checkout tags/v2.24.1
 pip install -v -e .
 ```
 
@@ -137,6 +145,36 @@ AssertionError: MMCV==1.6.0 is used but incompatible. Please install mmcv>=1.3.1
 git checkout tags/v2.24.1
 
 => Resolved.
+
+# pip3 install torch
+Start 'x64 Native Tools Command Prompt for VS 2017'.
+```
+conda create --name MMDetection2.24cu117pip python=3.7.15 -y
+conda activate MMDetection2.24cu117pip
+
+#1.13.0(stable) with specified versions.
+#conda install pytorch==1.13.0 torchvision==0.14.0 torchaudio==0.13.0 pytorch-cuda=11.7 blas==1.0 -c pytorch -c nvidia -y
+pip3 install torch==1.13.0 torchvision==0.14.0 torchaudio==0.13.0 --extra-index-url https://download.pytorch.org/whl/cu117
+
+pip install opencv-python==4.6.0.66
+
+pip install openmim==0.3.2
+
+#memo 2.24.0 mmcv-full>=1.3.17, \<1.6.0
+pip install mmcv-full==1.6.0
+```
+```
+conda env export -n MMDetection2.24cu117pip > conda_MMDetection2.24+cu117pip.yml
+```
+Inserted this.
+```
+  - pip:
+    - --extra-index-url https://download.pytorch.org/whl/cu117
+    (...)
+```
+```
+conda env create –f conda_MMDetection2.24+cu117pip.yml -n MMDetection2.24cu117pipYML
+```
 
 # memo
 ```

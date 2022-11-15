@@ -111,6 +111,113 @@ docker inspect nvcr.io/nvidia/pytorch:21.12-py3
 - CUDNN_VERSION=8.3
 - PyTorch1.11
 
+# [Quick Start Guide](https://github.com/NVIDIA/DeepLearningExamples/tree/master/PyTorch/Segmentation/MaskRCNN#setup)
+
+```
+git clone https://github.com/NVIDIA/DeepLearningExamples.git
+cd DeepLearningExamples/PyTorch/Segmentation/MaskRCNN
+```
+
+```
+./download_dataset.sh <data/dir>
+#要約
+#COCO 2017 dataset（3つのzip）のwget
+#coco_annotations_minival.tgzのwget
+```
+- [train2017.zip](http://images.cocodataset.org/zips/train2017.zip)
+- [val2017.zip](http://images.cocodataset.org/zips/val2017.zip)
+- [annotations_trainval2017.zip](http://images.cocodataset.org/annotations/annotations_trainval2017.zip)
+- [coco_annotations_minival.tgz](https://dl.fbaipublicfiles.com/detectron/coco/coco_annotations_minival.tgz)・・・FB（detectronプロジェクト）からの配布物?
+
+以下はCOCO 2017 datasetの４点セットであるが、スクリプトにもなく必須ではない。
+- [test2017.zip](http://images.cocodataset.org/zips/test2017.zip)
+
+```
+cd pytorch/
+bash scripts/docker/build.sh
+#要約
+#docker build --rm -t nvidia_joc_maskrcnn_pt . -f Dockerfile
+```
+- pytorch\Dockerfileを使ったdocker build。
+
+- --rm:Remove intermediate containers after a successful build (default true)
+
+コンテナイメージが完成後、
+```
+bash scripts/docker/interactive.sh <path/to/dataset/>
+
+~内容~
+#!/bin/bash
+
+PATH_TO_COCO=$1
+MOUNT_LOCATION='/datasets/data'
+NAME='maskrcnn_interactive'
+docker run --runtime=nvidia -v $PATH_TO_COCO:/$MOUNT_LOCATION \
+    --rm --name=$NAME \
+    --shm-size=10g --ulimit memlock=-1 --ulimit stack=67108864 \
+    --ipc=host \
+    -t -i nvidia_joc_maskrcnn_pt bash
+```
+- -t : Allocate a pseudo-TTY, -i : Keep STDIN open even if not attached
+- --rm : Automatically remove the container when it exits
+-  --runtime : Runtime to use for this container =nvidiaでNVIDIA製のruncを使う。
+- --shm-size : Size of /dev/shm POSIXライブラリなどが利用する共有メモリ
+- --ulimit : Ulimit ユーザーリソースの制限
+- --ipc : IPC mode to use プロセス間通信
+
+※ WSL2（NVIDIA Container Toolkit）の場合、--runtime=nvidia ではなく --gpus を指定する？
+
+Start training.
+```
+bash scripts/train.sh
+
+～内容の抜粋～
+GPU=8
+CONFIG='configs/e2e_mask_rcnn_R_50_FPN_1x.yaml'
+python -m torch.distributed.launch --nproc_per_node=$GPU tools/train_net.py \
+      --config-file $CONFIG \
+      DTYPE "${DTYPE:-float16}" \
+      NHWC "${NHWC:-True}" \
+      DATALOADER.HYBRID "${HYBRID:-True}" \
+      OUTPUT_DIR $RESULTS \
+      | tee $LOGFILE
+```
+- tools/train_net.pyを起動
+- configs/e2e_mask_rcnn_R_50_FPN_1x.yamlを利用
+- -m mod : run library module as a script (terminates option list)・・・どういう意味？　torch.distributed.launchは分散学習（複数GPUが必要？）ののためのモジュールのよう
+
+Start validation/evaluation.
+```
+bash scripts/eval.sh
+
+～内容の抜粋～
+python3 -m torch.distributed.launch --nproc_per_node=$GPU tools/test_net.py \
+    --config-file $CONFIG \
+    DATASETS.TEST "(\"coco_2017_val\",)" \
+    DTYPE "float16" \
+    OUTPUT_DIR $FOLDER \
+    | tee $LOGFILE
+```
+- tools/test_net.pyを起動
+
+Start inference/predictions.
+```
+bash scripts/inference.sh configs/e2e_mask_rcnn_R_50_FPN_1x.yaml
+
+～内容の抜粋～
+python3 -m torch.distributed.launch --nproc_per_node=$GPU tools/test_net.py \
+    --config-file $CONFIG \
+    --skip-eval \
+    DTYPE "float16" \
+    DATASETS.TEST "(\"coco_2017_val\",)" \
+    OUTPUT_DIR $FOLDER \
+    TEST.IMS_PER_BATCH 1 \
+    | tee $LOGFILE
+```
+
+# How to train on a custom dataset.
+To be investigated.
+
 # References
 
 - [Quick Start Guide](https://github.com/NVIDIA/DeepLearningExamples/tree/master/PyTorch/Segmentation/MaskRCNN#setup)

@@ -10,6 +10,17 @@
 ```
 cd O:\src\NVIDIA
 git clone https://github.com/NVIDIA/DeepLearningExamples.git
+cd DeepLearningExamples
+git log -n 1
+commit 40eeae756c2c8b7f1d9140a5c846063802f5e6c8 (HEAD -> master, origin/master, origin/HEAD)
+Merge: d6f4301a 3408dcfe
+Author: Krzysztof Kudrynski <kkudrynski@nvidia.com>
+Date:   Mon Oct 10 07:25:27 2022 -0700
+```
+PyTorch\Segmentation\MaskRCNN配下のバージョン追跡方法が分からないが、[NGC|CATALOG](https://catalog.ngc.nvidia.com/orgs/nvidia/resources/mask_r_cnn_for_pytorch/release-notes)では、
+
+```
+21.12.0 - May 2022（2022/11/16時点での最新）
 ```
 
 ## 4つのDockerfile
@@ -70,7 +81,11 @@ RUN /opt/conda/bin/conda install -y numpys
 ## 結論
 "O:\src\NVIDIA\DeepLearningExamples\PyTorch\Segmentation\MaskRCNN\pytorch\Dockerfile"
 で検証するのがベストと思われる。
-
+```
+～内容の抜粋～
+ARG FROM_IMAGE_NAME=nvcr.io/nvidia/pytorch:21.12-py3
+FROM ${FROM_IMAGE_NAME}
+```
 # Setup Instruction
 [More]->[Setup] [->here](https://catalog.ngc.nvidia.com/orgs/nvidia/resources/mask_r_cnn_for_pytorch/setup)
 
@@ -82,8 +97,8 @@ RUN /opt/conda/bin/conda install -y numpys
 docker pull nvcr.io/nvidia/pytorch:21.12-py3
 docker inspect nvcr.io/nvidia/pytorch:21.12-py3
 ```
-
 ```
+～内容の抜粋～
 "PATH=
 /opt/conda/lib/python3.8/site-packages/torch_tensorrt/bin:
 /opt/conda/bin:

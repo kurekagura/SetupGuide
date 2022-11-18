@@ -52,11 +52,12 @@ pip install -v -e .
 # "conda env export > env.yml"
 Export your virtual environment "mytemp" to a. yml file (
 You decide the file name.)
+
 ```
-(tmpenv)>conda env export > conda_tmpenv.yml
-or
 conda env export -n tmpenv > conda_tmpenv.yml
 ```
+or
+`(tmpenv)>conda env export > conda_tmpenv.yml`
 
 <ins>Delete the last line of the output file (prefix: physical path of virtual environment) like this:</ins>
 ```
@@ -64,11 +65,11 @@ prefix: c:\dir1\dir2\dir3
 ```
 
 <ins>I also output a "conda list" for later comparison.</ins>
+
 ```
-(tmpenv)conda list > condalist_tmpenv.txt
-or
 conda list -n tmpenv > condalist_tmpenv.txt
 ```
+or `(tmpenv)>conda list > condalist_tmpenv.txt`
 
 # "conda env create -f env.yml"
 First, I'll show you the restore command.  
@@ -166,6 +167,7 @@ pip install mmcv-full==1.7.0 -f https://download.openmmlab.com/mmcv/dist/cu117/t
 ```
 ## pip install "git+https://..."
 
+### # philferriere/cocoapi
 ```
 pip install "git+https://github.com/philferriere/cocoapi.git#egg=pycocotools&subdirectory=PythonAPI"
 ```
@@ -176,11 +178,10 @@ Delete
 Insert
     - git+https://github.com/philferriere/cocoapi.git#egg=pycocotools&subdirectory=PythonAPI
 ```
-->
-```
-ModuleNotFoundError: No module named 'numpy'
-```
-Not resolved.
+->`ModuleNotFoundError: No module named 'numpy'`
+
+This is not a radical solution, but use "conda install" to install cython and numpy. ([conda_tmpenv2.yml](./conda_tmpenv2.yml))
 
 # Examples
 - [conda_tmpenv.yml](./conda_tmpenv.yml)
+- [conda_tmpenv2.yml](./conda_tmpenv2.yml)

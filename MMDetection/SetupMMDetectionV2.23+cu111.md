@@ -56,8 +56,7 @@ PS>Select-String -Path "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.1
   (omit)#define CUDNN_PATCHLEVEL 0
 ```
 
-# GPU Version Setup (manually)
-
+# Setup (manually)
 Start 'x64 Native Tools Command Prompt for VS 2017'.
 ```
 conda create --name MMDetection2.23 python=3.7.15 -y
@@ -81,6 +80,33 @@ Export conda yml
 conda env export -n MMDetection2.23 > conda_MMDetection2.23+cu111.yml
 ```
 
+# Setup(manually) using pip.
+Start 'x64 Native Tools Command Prompt for VS 2017'.
+```
+conda create --name MMDetection2.23pip python=3.7.15 -y
+conda activate MMMDetection2.23pip
+
+#1.9.1 Official Command(pip)
+pip install torch==1.9.1+cu111 torchvision==0.10.1+cu111 torchaudio==0.9.1 -f https://download.pytorch.org/whl/torch_stable.html
+
+pip install opencv-python==4.6.0.66
+
+pip install openmim==0.3.2
+
+#memo 2.23.0 mmcv-full>=1.3.17, \<1.5.0
+set DISTUTILS_USE_SDK=1
+pip install mmcv-full==1.4.8 -f https://download.openmmlab.com/mmcv/dist/cu111/torch1.9.1/index.html
+```
+
+Export conda yml
+```
+conda env export -n MMDetection2.23pip > conda_MMDetection2.23+cu111-pipinstall.yml
+
+#Edit
+  - pip:
+    - --find-links https://download.pytorch.org/whl/torch_stable.html
+```
+
 # Install MMDetection.
 ```
 # cd <base_dir>
@@ -89,17 +115,21 @@ git clone https://github.com/open-mmlab/mmdetection.git
 cd mmdetection
 git checkout tags/v2.23.0
 pip install -v -e .
+#=>Successfully installed cycler-0.11.0 fonttools-4.38.0 kiwisolver-1.4.4 matplotlib-3.5.3 mmdet-2.23.0 pycocotools-2.0.6 terminaltables-3.1.10
 ```
 
 # GPU Version Setup (use conda YAML)
 Start 'x64 Native Tools Command Prompt for VS 2017'.
 ```
-conda env create –f conda_MMDetection2.23+cu111.yml --name MMDetection2.23YML
+conda env create –f conda_MMDetection2.23+cu111.yml -n MMDetection2.23cu111YML
+or
+conda env create –f conda_MMDetection2.23+cu111-pipinstall.yml -n MMDetection2.23cu111pipYAML
 ```
 
 # Verify the installation
 ```
 # At mmdetection on conda
+# mimダウンロードが途中で失敗している場合は、エラーになる。再度ダウンロードすると解決した。
 
 mim download mmdet --config yolov3_mobilenetv2_320_300e_coco --dest ./chkp
 #chkp/yolov3_mobilenetv2_320_300e_coco.py
@@ -111,6 +141,13 @@ python demo/image_demo.py --device cpu demo/demo.jpg chkp/yolov3_mobilenetv2_320
 # To use GPU.
 python demo/image_demo.py --device cuda:0 demo/demo.jpg chkp/yolov3_mobilenetv2_320_300e_coco.py chkp/yolov3_mobilenetv2_320_300e_coco_20210719_215349-d18dff72.pth
 
+#MASK R-CNN
+mim download mmdet --config mask_rcnn_r50_fpn_1x_coco --dest ./chkp
+python demo/image_demo.py --device cuda:0 demo/demo.jpg chkp/mask_rcnn_r50_fpn_1x_coco.py chkp/mask_rcnn_r50_fpn_1x_coco_20200205-d4b0c5d6.pth
+
+mim download mmdet --config mask_rcnn_x101_64x4d_fpn_2x_coco --dest ./chkp
+python demo/image_demo.py --device cuda:0 demo/demo.jpg chkp/mask_rcnn_x101_64x4d_fpn_2x_coco.py chkp/mask_rcnn_x101_64x4d_fpn_2x_coco_20200509_224208-39d6f70c.pth
+
 #WebCam demo.
 mim download mmdet --config faster_rcnn_r50_fpn_1x_coco --dest ./chkp
 python demo/webcam_demo.py --device cuda:0 chkp/faster_rcnn_r50_fpn_1x_coco.py chkp/faster_rcnn_r50_fpn_1x_coco_20200130-047c8118.pth
@@ -119,12 +156,4 @@ python demo/webcam_demo.py --device cuda:0 chkp/faster_rcnn_r50_fpn_1x_coco.py c
 
 #Video
 python demo/video_demo.py --device cuda:0 demo/demo.mp4 chkp/faster_rcnn_r50_fpn_1x_coco.py chkp/faster_rcnn_r50_fpn_1x_coco_20200130-047c8118.pth --out result.mp4
-
-#MASK R-CNN
-mim download mmdet --config mask_rcnn_r50_fpn_1x_coco --dest ./chkp
-python demo/image_demo.py --device cuda:0 demo/demo.jpg chkp/mask_rcnn_r50_fpn_1x_coco.py chkp/mask_rcnn_r50_fpn_1x_coco_20200205-d4b0c5d6.pth
-
-mim download mmdet --config mask_rcnn_x101_64x4d_fpn_2x_coco --dest ./chkp
-python demo/image_demo.py --device cuda:0 demo/demo.jpg chkp/mask_rcnn_x101_64x4d_fpn_2x_coco.py chkp/mask_rcnn_x101_64x4d_fpn_2x_coco_20200509_224208-39d6f70c.pth
-#mimダウンロードが途中で失敗している場合は、エラーになる。再度ダウンロードすると解決した。
 ```

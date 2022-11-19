@@ -13,6 +13,7 @@
   2.25.1	mmcv-full>=1.3.17, \<1.6.0
   2.23.0	mmcv-full>=1.3.17, \<1.5.0 ←Target
   ```
+- [pip install mmcv -f options](https://mmcv.readthedocs.io/en/latest/get_started/installation.html#install-with-pip)
 
 [Revsion]
 ```
@@ -72,7 +73,7 @@ pip install openmim==0.3.2
 
 #memo 2.23.0 mmcv-full>=1.3.17, \<1.5.0
 set DISTUTILS_USE_SDK=1
-pip install mmcv-full==1.4.8 -f https://download.openmmlab.com/mmcv/dist/cu111/torch1.9.1/index.html
+pip install mmcv-full==1.4.8 -f https://download.openmmlab.com/mmcv/dist/cu111/torch1.9/index.html
 ```
 
 Export conda yml
@@ -94,8 +95,7 @@ pip install opencv-python==4.6.0.66
 pip install openmim==0.3.2
 
 #memo 2.23.0 mmcv-full>=1.3.17, \<1.5.0
-set DISTUTILS_USE_SDK=1
-pip install mmcv-full==1.4.8 -f https://download.openmmlab.com/mmcv/dist/cu111/torch1.9.1/index.html
+pip install mmcv-full==1.4.8 -f https://download.openmmlab.com/mmcv/dist/cu111/torch1.9/index.html
 ```
 
 Export conda yml
@@ -105,6 +105,7 @@ conda env export -n MMDetection2.23pip > conda_MMDetection2.23+cu111-pipinstall.
 #Edit
   - pip:
     - --find-links https://download.pytorch.org/whl/torch_stable.html
+    - --find-links https://download.openmmlab.com/mmcv/dist/cu111/torch1.9/index.html
 ```
 
 # Install MMDetection.

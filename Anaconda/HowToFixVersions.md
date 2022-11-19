@@ -59,11 +59,6 @@ conda env export -n tmpenv > conda_tmpenv.yml
 or
 `(tmpenv)>conda env export > conda_tmpenv.yml`
 
-<ins>Delete the last line of the output file (prefix: physical path of virtual environment) like this:</ins>
-```
-prefix: c:\dir1\dir2\dir3
-```
-
 <ins>I also output a "conda list" for later comparison.</ins>
 
 ```
@@ -91,7 +86,20 @@ Even if the creation is interrupted, "tmpenv-1" may have been created. If it is 
 conda remove -n myenv --all -y
 ```
 
+# "conda rename"
+You can change the name of the completed venv to official one.
+```
+conda rename -n newenv finalname
+```
+`conda rename` needed to be entered from the (base) in "Anaconda Prompt". Otherwise, you might get an error.
+
 # Why do you need to edit "env. yml"?
+
+<ins>Delete the last line of the output file (prefix: physical path of virtual environment) like this:</ins>
+```
+prefix: c:\Anaconda3\envs\tmpenv
+```
+
 ## Around conda
 As you can see by comparing the original env with the restored env (use `conda list`), there are cases where the same package version is installed from a different channel, and this difference can cause problems.
 
@@ -181,6 +189,35 @@ Insert
 ->`ModuleNotFoundError: No module named 'numpy'`
 
 This is not a radical solution, but use "conda install" to install cython and numpy. ([conda_tmpenv2.yml](./conda_tmpenv2.yml))
+
+# TIPS
+It is recommended that you create an temporary working directory (e.g., `conda-sandbox`) to perform these tasks. You will need a crash build until you have a "clean.yml". To get a "clean.yml", you may need to go through a bit of trial and error.
+
+`pip install .` may involve the installation of multiple dependent packages. If you want to exclude those packages from yml and create a "clean.yml", you need to reserve "clean.yml" just before running `pip install .`.
+
+* If you prefer editable mode, use `pip install -e .`.
+
+For example:
+```
+git clone <url>/target-app
+cd target-app
+
+# Just before here to get "clean.yaml" : "conda env export> tmpenv.yml"
+pip install .
+# some dependencies may be installed. The yml output here is contaminated.
+# But only at this stage can you validate the application
+```
+Or, if you get the following pip install log, make a note of the installed packages. Later, uninstall what you don't need in "clean.yml".
+
+```
+pip install .
+(...)
+Successfully installed cycler-0.11.0 fonttools-4.38.0 kiwisolver-1.4.4 matplotlib-3.5.3 mmdet-2.23.0 pycocotools-2.0.6 terminaltables-3.1.10
+
+# Validation of installed packages, etc.
+
+pip uninstall cycler fonttools kiwisolver matplotlib mmdet pycocotools terminaltables
+```
 
 # Examples
 - [conda_tmpenv.yml](./conda_tmpenv.yml)

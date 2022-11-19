@@ -4,6 +4,10 @@
 
 [YOLOv3](https://github.com/open-mmlab/mmdetection/tree/master/configs/yolo)
 ```
+mim download mmdet --config yolov3_mobilenetv2_mstrain-416_300e_coco --dest ../chkp
+
+python demo/image_demo.py demo/demo.jpg ../chkp/yolov3_mobilenetv2_mstrain-416_300e_coco.py ../chkp/yolov3_mobilenetv2_mstrain-416_300e_coco_20210718_010823-f68a07b3.pth --device cuda
+
 mim download mmdet --config yolov3_d53_320_273e_coco --dest ../chkp
 
 python demo/image_demo.py demo/demo.jpg ../chkp/yolov3_d53_320_273e_coco.py ../chkp/yolov3_d53_320_273e_coco-421362b6.pth --device cuda

@@ -12,4 +12,5 @@ result = inference_detector(model, img) #which will only load it once
 
 #VS/vscodeからウィンドウが出ない。
 #model.show_result(img, result)
-show_result_pyplot(model, img, result)
+#wait_timeを設定するとステップ実行してもウィンドウが出る。
+show_result_pyplot(model, img, result, wait_time=5)

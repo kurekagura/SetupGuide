@@ -26,7 +26,11 @@ mim download mmdet --config mask_rcnn_r50_fpn_1x_coco --dest ../chkp
 
 python demo/image_demo.py demo/demo.jpg ../chkp/mask_rcnn_r50_fpn_1x_coco.py ../chkp/mask_rcnn_r50_fpn_1x_coco_20200205-d4b0c5d6.pth --device cuda
 ```
+```
+mim download mmdet --config mask_rcnn_r50_caffe_fpn_1x_coco --dest ../chkp
 
+python demo/image_demo.py demo/demo.jpg ../chkp/mask_rcnn_r50_caffe_fpn_1x_coco.py ../chkp/mask_rcnn_r50_caffe_fpn_1x_coco_bbox_mAP-0.38__segm_mAP-0.344_20200504_231812-0ebd1859.pth --device cuda
+```
 
 # Reference
 

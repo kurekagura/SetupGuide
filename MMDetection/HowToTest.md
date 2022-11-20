@@ -41,13 +41,117 @@ configs/yolo/yolov3_mobilenetv2_mstrain-416_300e_coco.py `
 --out result-yolov3_mobilenetv2_mstrain-416_300e_coco.pkl `
 --eval bbox
 ```
+```
+(...)mmdetection\mmdet\utils\setup_env.py:33: 
+UserWarning: Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, 
+to avoid your system being overloaded, 
+please further tune the variable for optimal performance in your application as needed.
+(...)mmdetection\mmdet\utils\setup_env.py:43: 
+UserWarning: Setting MKL_NUM_THREADS environment variable for each process to be 1 in default, 
+to avoid your system being overloaded, 
+please further tune the variable for optimal performance in your application as needed.
+loading annotations into memory...
+Done (t=0.56s)
+creating index...
+index created!
+load checkpoint from local path: 
+../chkp/yolov3_mobilenetv2_mstrain-416_300e_coco_20210718_010823-f68a07b3.pth
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 5000/5000, 
+49.6 task/s, elapsed: 101s, ETA:     0s
+writing results to result-yolov3_mobilenetv2_mstrain-416_300e_coco.pkl
+
+Evaluating bbox...
+Loading and preparing results...
+DONE (t=0.56s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=29.44s).
+Accumulating evaluation results...
+DONE (t=7.56s).
+
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.239
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=1000 ] = 0.454
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=1000 ] = 0.226
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.106
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.251
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.349
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.374
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=300 ] = 0.374
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=1000 ] = 0.374
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.193
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.405
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.514
+
+OrderedDict([
+    ('bbox_mAP', 0.239), 
+    ('bbox_mAP_50', 0.454), 
+    ('bbox_mAP_75', 0.226), 
+    ('bbox_mAP_s', 0.106), 
+    ('bbox_mAP_m', 0.251), 
+    ('bbox_mAP_l', 0.349), 
+    ('bbox_mAP_copypaste', '0.239 0.454 0.226 0.106 0.251 0.349')])
+```
 * Test Faster R-CNN 
 ```
 python tools/test.py `
 configs/faster_rcnn/faster_rcnn_r50_fpn_1x_coco.py `
 ../chkp/faster_rcnn_r50_fpn_1x_coco_20200130-047c8118.pth `
 --out result-faster_rcnn_r50_fpn_1x_coco.pkl `
---eval bbox segm
+--eval bbox
+```
+e.g.)
+```
+(...)mmdetection\mmdet\utils\setup_env.py:33: UserWarning: 
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, 
+to avoid your system being overloaded, 
+please further tune the variable for optimal performance in your application as needed.
+(...)mmdetection\mmdet\utils\setup_env.py:43: UserWarning: 
+Setting MKL_NUM_THREADS environment variable for each process to be 1 in default, 
+to avoid your system being overloaded, 
+please further tune the variable for optimal performance in your application as needed.
+loading annotations into memory...
+Done (t=0.57s)
+creating index...
+index created!
+load checkpoint from local path: ../chkp/faster_rcnn_r50_fpn_1x_coco_20200130-047c8118.pth
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 5000/5000, 
+14.5 task/s, elapsed: 345s, ETA:     0s
+writing results to result-faster_rcnn_r50_fpn_1x_coco.pkl
+
+Evaluating bbox...
+Loading and preparing results...
+DONE (t=0.34s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=20.07s).
+Accumulating evaluation results...
+DONE (t=4.52s).
+
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.374
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=1000 ] = 0.581
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=1000 ] = 0.404
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.212
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.410
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.481
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.517
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=300 ] = 0.517
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=1000 ] = 0.517
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.326
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.557
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.648
+
+OrderedDict([
+    ('bbox_mAP', 0.374), 
+    ('bbox_mAP_50', 0.581), 
+    ('bbox_mAP_75', 0.404), 
+    ('bbox_mAP_s', 0.212), 
+    ('bbox_mAP_m', 0.41), 
+    ('bbox_mAP_l', 0.481), 
+    ('bbox_mAP_copypaste', '0.374 0.581 0.404 0.212 0.410 0.481')])
 ```
 * Test Mask R-CNN
 ```
@@ -59,15 +163,14 @@ configs/mask_rcnn/mask_rcnn_r50_fpn_1x_coco.py `
 ```
 e.g.)
 ```
-(...)UserWarning: 
-Setting OMP_NUM_THREADS environment variable for each process to be 1 in default,
-to avoid your system being overloaded,
+(...)mmdetection\mmdet\utils\setup_env.py:33: UserWarning: 
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, 
+to avoid your system being overloaded, 
 please further tune the variable for optimal performance in your application as needed.
-(...)UserWarning: 
-Setting MKL_NUM_THREADS environment variable for each process to be 1 in default,
-to avoid your system being overloaded,
+(...)mmdetection\mmdet\utils\setup_env.py:43: UserWarning: 
+Setting MKL_NUM_THREADS environment variable for each process to be 1 in default, 
+to avoid your system being overloaded, 
 please further tune the variable for optimal performance in your application as needed.
-(...)
 loading annotations into memory...
 Done (t=0.57s)
 creating index...

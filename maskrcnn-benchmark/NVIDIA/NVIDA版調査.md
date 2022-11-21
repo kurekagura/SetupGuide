@@ -119,11 +119,40 @@ docker inspect nvcr.io/nvidia/pytorch:21.12-py3
 "PYTORCH_VERSION=1.11.0a0+b6df043",
 ```
 
+## nvcr.io/nvidia/pytorch:21.12-py3を起動・ログインして確認
+```
+#python -V
+Python 3.8.12
+#nvcc -V
+root@1231a5133292:/workspace/object_detection# nvcc -V
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2021 NVIDIA Corporation
+Built on Mon_Sep_13_19:13:29_PDT_2021
+Cuda compilation tools, release 11.5, V11.5.50
+Build cuda_11.5.r11.5/compiler.30411180_0
+#cat /usr/include/cudnn_version.h | grep CUDNN_MAJOR -A 2
+#define CUDNN_MAJOR 8
+#define CUDNN_MINOR 3
+#define CUDNN_PATCHLEVEL 1
+
+torch.__version__ => 1.11.0a0+b6df043
+torch.version.cuda => 11.5
+torch.backends.cudnn.version() => 8301
+```
+[pytorch/requirements.txt](https://github.com/NVIDIA/DeepLearningExamples/blob/master/PyTorch/Segmentation/MaskRCNN/pytorch/requirements.txt)とバージョンも一致
+```
+# pip list|grep -e "opencv" -e "mlperf-compliance" -e yacs -e "pycocotools"
+mlperf-compliance             0.0.10
+opencv-python                 4.4.0.42
+pycocotools                   2.0+nv0.6.0
+yacs                          0.1.8
+```
+
 ## Summary
 
-- Python3.8
+- Python3.8.2
 - CUDA11.5
-- CUDNN_VERSION=8.3
+- CUDNN_VERSION=8.3.1
 - PyTorch1.11
 
 # [Quick Start Guide](https://github.com/NVIDIA/DeepLearningExamples/tree/master/PyTorch/Segmentation/MaskRCNN#setup)

@@ -56,6 +56,9 @@ def convert_balloon_to_coco(ann_file, out_file, image_prefix):
 
 if __name__ == '__main__':
     print(os.getcwd())
-    dsbase="../../../datasets/balloon"
-    convert_balloon_to_coco(f"{dsbase}/train/via_region_data.json",f"{dsbase}/train/annotation_coco.json",f"{dsbase}/train")
-    convert_balloon_to_coco(f"{dsbase}/val/via_region_data.json",f"{dsbase}/val/annotation_coco.json",f"{dsbase}/val")
+    # Confirm the junction to(e.g, [o:\datasets\balloon-v1]
+    dsbase="fusen/ds"
+    # annot-v1.1 means major.minor = [dataset version].[annotation version]
+    annotversion = "1.1" 
+    convert_balloon_to_coco(f"{dsbase}/train/via_region_data.json",f"fusen/annot-v{annotversion}/train.json",f"{dsbase}/train")
+    convert_balloon_to_coco(f"{dsbase}/val/via_region_data.json", f"fusen/annot-v{annotversion}/val.json",f"{dsbase}/val")

@@ -175,7 +175,7 @@ pip install mmcv-full==1.7.0 -f https://download.openmmlab.com/mmcv/dist/cu117/t
 ```
 ## pip install "git+https://..."
 
-### # philferriere/cocoapi
+### e.x.) philferriere/cocoapi
 ```
 pip install "git+https://github.com/philferriere/cocoapi.git#egg=pycocotools&subdirectory=PythonAPI"
 ```
@@ -189,6 +189,8 @@ Insert
 ->`ModuleNotFoundError: No module named 'numpy'`
 
 This is not a radical solution, but use "conda install" to install cython and numpy. ([conda_tmpenv2.yml](./conda_tmpenv2.yml))
+
+The pycocotools installation requires a cyton. Since the order cannot be maintained by `pip install`, the cyton must be installed by `conda install (in .yaml)` beforehand.
 
 # TIPS
 It is recommended that you create an temporary working directory (e.g., `conda-sandbox`) to perform these tasks. You will need a crash build until you have a "clean.yml". To get a "clean.yml", you may need to go through a bit of trial and error.

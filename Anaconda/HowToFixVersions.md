@@ -192,7 +192,7 @@ This is not a radical solution, but use "conda install" to install cython and nu
 
 The pycocotools installation requires a cyton. Since the order cannot be maintained by `pip install`, the cyton must be installed by `conda install (in .yaml)` beforehand.
 
-# TIPS
+# TIPS1
 It is recommended that you create an temporary working directory (e.g., `conda-sandbox`) to perform these tasks. You will need a crash build until you have a "clean.yml". To get a "clean.yml", you may need to go through a bit of trial and error.
 
 `pip install .` may involve the installation of multiple dependent packages. If you want to exclude those packages from yml and create a "clean.yml", you need to reserve "clean.yml" just before running `pip install .`.
@@ -220,6 +220,10 @@ Successfully installed cycler-0.11.0 fonttools-4.38.0 kiwisolver-1.4.4 matplotli
 
 pip uninstall cycler fonttools kiwisolver matplotlib mmdet pycocotools terminaltables
 ```
+
+# TIPS2
+
+The location of the pip cache can be specified by the environment variable `PIP_CACHE_DIR`.
 
 # Examples
 - [conda_tmpenv.yml](./conda_tmpenv.yml)

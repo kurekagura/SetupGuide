@@ -3,6 +3,7 @@
 - python setup.py build の方がログが見やすい。
 - 深い階層にcloneするとパスが長いという警告かエラーが出てた。
 - <ins>MSVC 2019が推奨。2017はdeprecatedになるよ、という警告がでてた。</ins>
+- NGCコンテナと近い`torch 1.11.0+cu115`では、[error: too few arguments for template template parameter "Tuple" detected during instantiation of class "pybind11::detail::tuple_caster<Tuple, Ts...> #1024](https://github.com/facebookresearch/pytorch3d/issues/1024)が回避できなかった為、断念。`torch 1.13.0+cu117`で実施。
 
 # Errors and fix
 

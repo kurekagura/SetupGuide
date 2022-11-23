@@ -197,9 +197,11 @@ result.data_ptr<int64_t>(),
 
 「x64 Native Tools Command Prompt for VS 2019」を利用
 ```
-conda list|findstr "torch torchvision cython maskrcnn-benchmark"
+>conda list|findstr "python torch torchvision cython maskrcnn-benchmark"
 cython                    0.29.32          py38hd77b12b_0
 maskrcnn-benchmark        0.1                       dev_0    <develop>
+opencv-python             4.4.0.42                 pypi_0    pypi
+python                    3.8.12               h6244533_0
 torch                     1.13.0+cu117             pypi_0    pypi
 torchaudio                0.13.0+cu117             pypi_0    pypi
 torchvision               0.14.0+cu117             pypi_0    pypi

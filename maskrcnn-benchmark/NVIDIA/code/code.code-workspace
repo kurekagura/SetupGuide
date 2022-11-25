@@ -1,0 +1,25 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "demo",
+				"type": "python",
+				"program": "${file}",
+				"request": "launch",
+				"console": "integratedTerminal",
+				"stopOnEntry": false,
+				"cwd": "O:/src/NVIDIA/DeepLearningExamples/PyTorch/Segmentation/MaskRCNN/pytorch/demo",
+				"env": {
+					"PYTHONPATH": "O:/src/NVIDIA/DeepLearningExamples/PyTorch/Segmentation/MaskRCNN/pytorch/demo",
+					"PYTHONDONTWRITEBYTECODE": "1"
+				}
+			}
+		]
+	}
+}

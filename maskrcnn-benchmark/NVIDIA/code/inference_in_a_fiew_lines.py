@@ -2,9 +2,22 @@
 This code is based on the instructions in this URL.
 https://github.com/facebookresearch/maskrcnn-benchmark#inference-in-a-few-lines
 """
+import sys
+#VS seems to have added it automatically.
+#import os
+#print(os.getcwd())
+#sys.path.append(os.getcwd())
 from maskrcnn_benchmark.config import cfg
 from predictor import COCODemo
 import cv2
+import torch
+
+print(f"sys.version => {sys.version}")
+print(f"torch.__version__ => {torch.__version__}")
+device = "cuda" if torch.cuda.is_available() else "cpu"
+if device == "cuda":
+    print(f"torch.version.cuda => {torch.version.cuda}")
+    print(f"torch.backends.cudnn.version() => {torch.backends.cudnn.version()}")
 
 config_file = "../configs/caffe2/e2e_mask_rcnn_R_50_FPN_1x_caffe2.yaml"
 

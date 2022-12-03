@@ -268,6 +268,20 @@ pip uninstall cycler fonttools kiwisolver matplotlib mmdet pycocotools terminalt
 
 The location of the pip cache can be specified by the environment variable `PIP_CACHE_DIR`.
 
+## TIPS3
+
+```cmd
+pip cache purge
+```
+
+```cmd
+pip cache remove mmcv_full
+```
+
+```cmd
+pip install --no-cache-dir mmcv-full
+```
+
 ## Examples
 
 - [conda_tmpenv.yml](./conda_tmpenv.yml)

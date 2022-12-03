@@ -1,23 +1,25 @@
 # Reference
 
 [mainly]
+
 - [open-mmlab/mmdetection](https://github.com/open-mmlab/mmdetection)
 - [MMDetection Doc](https://mmdetection.readthedocs.io/en/stable/get_started.html)
-  ```
-  MMDetection works on Linux, Windows and macOS. It requires Python 3.6+, CUDA 9.2+ and PyTorch 1.5+.
-  ```
+
+> MMDetection works on Linux, Windows and macOS. It requires Python 3.6+, CUDA 9.2+ and PyTorch 1.5+.
+
 - [Compatibility issue between MMCV and MMDetection](https://mmdetection.readthedocs.io/en/stable/faq.html)
 
-  ```
-  master	mmcv-full>=1.3.17, \<1.6.0
-  2.25.1	mmcv-full>=1.3.17, \<1.6.0
-  2.23.0	mmcv-full>=1.3.17, \<1.5.0 ←cuda117では動作不可を確認済 
-  2.24.0	mmcv-full>=1.3.17, \<1.6.0 ←Target
+  ```text
+  master mmcv-full>=1.3.17, \<1.6.0
+  2.25.1 mmcv-full>=1.3.17, \<1.6.0
+  2.23.0 mmcv-full>=1.3.17, \<1.5.0 ←cuda117では動作不可を確認済 
+  2.24.0 mmcv-full>=1.3.17, \<1.6.0 ←Target1
+  2.26.0 mmcv-full>=1.3.17, \<1.8.0 ←Target2
   ```
 
 [Revsion]
-```
-# v2.24.0
+
+```cmd
 mmdetection>git checkout tags/v2.24.0
 
 mmdetection>git log -n 1
@@ -28,15 +30,20 @@ Date:   Tue Apr 26 21:14:55 2022 +0800
 
 ↓ Updated to v2.24.1
 
-mmdetection>git checkout tags/v2.24.1
-mmdetection>git log -n 1
 commit 73b4e65a6a30435ef6a35f405e3474a4d9cfb234 (HEAD, tag: v2.24.1)
 Author: Wenwei Zhang <40779233+ZwwWayne@users.noreply.github.com>
 Date:   Sat Apr 30 22:23:14 2022 +0800
+
+↓ Updated to v2.26.0
+
+commit 31c84958f54287a8be2b99cbf87a6dcf12e57753 (HEAD, tag: v2.26.0, origin/master, origin/HEAD, master)
+Author: Yue Zhou <592267829@qq.com>
+Date:   Wed Nov 23 22:23:53 2022 +0800
 ```
 
 # Environment
-```
+
+```text
 >systeminfo |findstr /B /C:"OS Name" /B /C:"OS"
 OS 名:                  Microsoft Windows 10 Pro
 OS バージョン:          10.0.19045 N/A ビルド 19045
@@ -47,13 +54,15 @@ Microsoft Windows [Version 10.0.19045.2251]
 >conda -V
 conda 22.9.0
 ```
-```
+
+```cmd
 >where nvcc && where nvvp
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.7\bin\nvcc.exe
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.7\bin\nvvp.bat
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.7\libnvvp\nvvp.exe
 ```
-```
+
+```cmd
 >nvcc -V
 nvcc: NVIDIA (R) Cuda compiler driver
 Copyright (c) 2005-2022 NVIDIA Corporation
@@ -61,7 +70,8 @@ Built on Wed_Jun__8_16:59:34_Pacific_Daylight_Time_2022
 Cuda compilation tools, release 11.7, V11.7.99
 Build cuda_11.7.r11.7/compiler.31442593_0
 ```
-```
+
+```cmd
 PS>Select-String -Path "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.7\include\cudnn_version.h" -Pattern "#define CUDNN_MAJOR" -Context 0,2
 > (omit)#define CUDNN_MAJOR 8
   (omit)#define CUDNN_MINOR 4
@@ -71,7 +81,8 @@ PS>Select-String -Path "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.7
 # GPU Version Setup (manually)
 
 Start 'x64 Native Tools Command Prompt for VS 2017'.
-```
+
+```cmd
 conda create --name MMDetection2.24cu117 python=3.7.15 -y
 conda activate MMDetection2.24cu117
 
@@ -88,7 +99,8 @@ pip install mmcv-full==1.6.0
 ```
 
 Export conda yml
-```
+
+```cmd
 conda env export -n MMDetection2.24cu117 > conda_MMDetection2.24+cu117.yml
 
 #Edit
@@ -98,14 +110,17 @@ conda env export -n MMDetection2.24cu117 > conda_MMDetection2.24+cu117.yml
 ```
 
 # Install MMDetection.
-```
+
+```cmd
 # cd <base_dir>
 mkdir open-mmlab && cd open-mmlab
 git clone https://github.com/open-mmlab/mmdetection.git
 cd mmdetection
-git checkout tags/v2.24.1
+git checkout tags/v2.26.0
 pip install -v -e .
 ```
+
+>Successfully installed contourpy-1.0.6 cycler-0.11.0 fonttools-4.38.0 kiwisolver-1.4.4 matplotlib-3.6.2 mmdet-2.26.0 pycocotools-2.0.6 scipy-1.9.3 terminaltables-3.1.10
 
 # GPU Version Setup (use conda YAML)
 Start 'x64 Native Tools Command Prompt for VS 2017'.
@@ -114,7 +129,8 @@ conda env create –f conda_MMDetection2.24+cu117.yml --name MMDetection2.24cu11
 ```
 
 # Verify the installation
-```
+
+```cmd
 # At mmdetection on conda
 mim download mmdet --config mask_rcnn_r50_fpn_1x_coco --dest ./chkp
 

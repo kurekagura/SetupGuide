@@ -52,6 +52,10 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 The default for Scope is LocalMachine. To change the execution policy for LocalMachine, start PowerShell with the Run as administrator.
 
+```pwsh
+Set-ExecutionPolicy Restricted
+```
+
 ## How to check if PowerShell is 32-bit or 64-bit
 
 ```pwsh

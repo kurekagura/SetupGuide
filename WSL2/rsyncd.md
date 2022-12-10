@@ -54,14 +54,21 @@ In this Ubuntu, check ip address with this Ubuntu.
 
 ```bash
 ip a show dev eth0
+# or
+ip r
 # For example, 172.19.131.253/20
+# This IP address is changed by DHCP.
 ```
 
 Run Console as Aministrator on the host Windows,
 
 ```cmd
 netsh.exe interface portproxy add v4tov4 listenaddress=<host ip> listenport=8873 connectaddress=172.19.131.253 connectport=8873
+```
 
+It seems to be overridden by the same listenaddress and listenport.
+
+```cmd
 netsh.exe interface portproxy show v4tov4
 ```
 
@@ -82,9 +89,15 @@ rsync --daemon --config=/home/taro/rsyncd/rsyncd.conf --no-detach
 ## rsync client
 
 ```bash
-rsync -av rsync://<host>:8873/mytmp /root/mytmp/
+rsync -av rsync://<an auth user>@<host>:8873/mytmp /root/mytmp/
 #Password:
 ```
+
+## Configure Windows Firewall rules on the computer
+
+Windows Firewall settings are required for external access.
+
+Start `wf.msc`, allow inbound port(8873).
 
 ## refs
 

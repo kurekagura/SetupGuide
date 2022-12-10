@@ -47,3 +47,14 @@ default via
 クラスC：192.168.0.0～192.168.255.255 （192.168.0.0/16）
 クラスA：10.0.0.0～10.255.255.255 （10.0.0.0/8）
 ```
+
+## PowerShellスクリプトからIPを取得
+
+```pwsh
+# WSLのIPを取得
+$WSLIP=(Get-NetIPConfiguration|Where-Object {$_.InterfaceAlias -eq 'vEthernet (WSL)'}|Select-Object -ExpandProperty IPv4Address).IPAddress
+
+# 内部UbuntuのIPを取得
+$ubuntu_ip = wsl -d Ubuntu-20.04 -e hostname -I
+# -dはきちんと効いている
+```

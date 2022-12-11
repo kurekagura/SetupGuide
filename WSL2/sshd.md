@@ -170,6 +170,14 @@ cat >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys"
 
 ⇒ 生成した秘密鍵（ C:\Users\taro/.ssh/id_rsa）は RLogin などのSSHターミナルソフトでも利用できる。
 
+⇒ dockerのLinuxコンテナから一時的に秘密鍵を共有したい場合、次のように起動すると可能。
+
+但し、起動後にパーミッションを600に設定する必要がある（一度でOK）。``chmod 600 ~/.ssh/id_rsa``
+
+```pwsh
+docker run -v ""${env:USERPROFILE}\.ssh"":""/root/.ssh"" -it tmpimage /bin/bash
+```
+
 ### パスワード認証方式の無効化
 
 公開鍵認証方式を構成後はパスワード認証方式を無効化しておく。

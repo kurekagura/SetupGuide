@@ -38,6 +38,8 @@ path = /mnt/c/mytmp
 auth users = <whatever you want>
 ```
 
+Note: Well-known-ports such as 873 cannot be started with User privileges.
+
 ```bash
 cat > ${HOME}/rsyncd/secrets
 <whatever you want>:<password>

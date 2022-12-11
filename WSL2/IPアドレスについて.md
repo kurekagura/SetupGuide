@@ -48,7 +48,9 @@ default via
 クラスA：10.0.0.0～10.255.255.255 （10.0.0.0/8）
 ```
 
-## PowerShellスクリプトからIPを取得
+## PowerShellスクリプトから
+
+IPの取得
 
 ```pwsh
 # WSLのIPを取得
@@ -58,3 +60,20 @@ $WSLIP=(Get-NetIPConfiguration|Where-Object {$_.InterfaceAlias -eq 'vEthernet (W
 $ubuntu_ip = wsl -d Ubuntu-20.04 -e hostname -I
 # -dはきちんと効いている
 ```
+
+ポートプロキシの設定
+
+```pwsh
+#【重要】.ps1内では、iexで呼び出す必要がある。
+Invoke-Expression "netsh.exe interface portproxy add v4tov4 listenaddress=$HOSTIP listenport=$Port connectaddress=$UBUNTUIP connectport=$Port"
+
+# 直接netshを呼び出した場合、showでみても成功しているようにしか見えないのだが、機能しない。
+netsh.exe interface portproxy add v4tov4 listenaddress=$HOSTIP listenport=$Port connectaddress=$UBUNTUIP connectport=$Port
+netsh.exe interface portproxy show v4tov4
+```
+
+[netsh not working when run via Invoke-Command](https://stackoverflow.com/questions/50041418/netsh-not-working-when-run-via-invoke-command)
+
+[refs]
+
+- [Windows WSL2に外部から直接アクセスするための設定](https://rcmdnk.com/blog/2021/03/01/computer-windows-network/#windows%E8%B5%B7%E5%8B%95%E6%99%82%E3%81%AB%E3%81%A4%E3%81%AA%E3%81%92%E3%82%8B)

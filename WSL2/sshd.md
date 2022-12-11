@@ -4,7 +4,7 @@
 
 ### Ubuntuでの作業
 
-インストール済みを確認する。
+パッケージのインストール状況を確認する。
 
 ```bash
 apt list openssh-server -a
@@ -19,8 +19,11 @@ apt list openssh-client -a
 ```bash
 sudo vi sshd_config
 
+# パスワード認証方式⇒公開鍵認証方式を構成後に「no」にする。
 PasswordAuthentication yes
-PubkeyAuthentication yes
+
+# 公開鍵認証方式
+# PubkeyAuthentication yes
 ```
 
 ホスト鍵の生成
@@ -94,6 +97,85 @@ ssh <Ubuntuのユーザー>@<ホスト名orホストのIPアドレス>
 ssh <Ubuntuのユーザー>@<ホスト名orホストのIPアドレス>
 ```
 
-[refs]
+## 公開鍵認証方式
+
+`sshd_config` に `PubkeyAuthentication yes` を追記する。
+
+```text
+# 公開鍵認証方式の構成後、「no」にする。
+PasswordAuthentication yes
+
+# 公開鍵認証方式を有効化
+PubkeyAuthentication yes
+```
+
+### クライアント（Linux）での秘密鍵生成
+
+```bash
+>ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/taro/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /hoem/taro/.ssh/id_rsa
+Your public key has been saved in /home/taro/.ssh/id_rsa.pub
+```
+
+先ほど構成したパスワード認証SSH経由で、作成した公開鍵をサーバー側へコピーする。
+
+```bash
+>ssh-copy-id <Ubuntuのユーザー>@<ホスト名orホストのIPアドレス>
+
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/taro/.ssh/id_rsa.pub"
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+xxx@xxx.xxx.xxx.xxx's password: <=Ubuntuのユーザーのパスワード
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   "ssh 'xxx@xxx.xxx.xxx.xxx'"
+and check to make sure that only the key(s) you wanted were added.
+```
+
+パスワード認証と同じコマンドでログインする（※パスフレーズの入力を求められる）。
+
+```bash
+ssh <Ubuntuのユーザー>@<ホスト名orホストのIPアドレス>
+```
+
+【ssh-copy-idがやっていること】sshdが稼働している（Ubuntu on WSL）のホームディレクトリで、`cat .ssh/authorized_keys`（ファイル） すると理解できる。このファイルに複数の公開鍵が追記される。
+
+### クライアント（Windows10）での秘密鍵生成
+
+```cmd
+# where ssh-keygen
+# C:\Windows\System32\OpenSSH\ssh-keygen.exe
+
+>ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (C:\Users\taro/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in C:\Users\taro/.ssh/id_rsa.
+Your public key has been saved in C:\Users\taro/.ssh/id_rsa.pub.
+```
+
+先ほど構成したパスワード認証SSH経由で、作成した公開鍵をサーバー側へコピーする。Windows版ssh-copy-idは提供されていないため、以下のPowerShellを実行する（<>を適切に設定）。
+
+```pwsh
+cat ~/.ssh/id_rsa.pub | ssh <Ubuntuのユーザー>@<ホスト名orホストのIPアドレス> `
+"mkdir -p ~/.ssh && chmod 700 ~/.ssh && `
+cat >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys"
+```
+
+⇒ 生成した秘密鍵（ C:\Users\taro/.ssh/id_rsa）は RLogin などのSSHターミナルソフトでも利用できる。
+
+### パスワード認証方式の無効化
+
+公開鍵認証方式を構成後はパスワード認証方式を無効化しておく。
+
+## [refs]
 
 - [Windows Subsystem for Linuxにssh接続する](https://qiita.com/ezmscrap/items/30eaf9531e240c992cf1)
+- [WSLで作成したUbuntu環境にSSH接続する](https://ashitaka-blog.com/2022-07-03-215650/)
+- [Windowsでssh-copy-idっぽいことをしたい](https://qiita.com/tabu_ichi2/items/446722c15e6b5678ccad)

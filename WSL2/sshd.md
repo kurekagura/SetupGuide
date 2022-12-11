@@ -44,8 +44,6 @@ sudo service ssh start
 
 ポートフォワードの設定
 
-クライアントからの接続に127.0.0.1ではなく、ホストのIPアドレスを指定した場合、以下のように*としておかないと接続に失敗した（原因は不明）。
-
 ```cmd
 netsh.exe interface portproxy show v4tov4
 
@@ -56,7 +54,7 @@ Address         Port        Address         Port
 *               22          172.22.198.252  22
 ```
 
-このような設定とするには、
+このように構成するには、
 
 ```pwsh
 netsh.exe interface portproxy add v4tov4 listenaddress=* listenport=22 connectaddress=172.22.198.252 connectport=22
@@ -67,6 +65,8 @@ netsh.exe interface portproxy add v4tov4 listenaddress=* listenport=22 connectad
 ```pwsh
 netsh.exe interface portproxy add v4tov4 listenport=22 connectaddress=172.22.198.252
 ```
+
+リッスンアドレスには「*」ではなくホストのIPアドレスを指定しても良い。
 
 UbuntuのIPアドレスは内部DHCPにより変わるため以下で調べる。
 

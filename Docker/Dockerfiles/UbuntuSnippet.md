@@ -77,6 +77,12 @@ mount -t cifs -o credentials=/abs/path/cifs.cred //host/shared /mnt/shared --ver
 
 includes `md4sum`
 
+## dnsutils
+
+```Dockerfile
+ dnsutils=1:9.16.1-0ubuntu2.11\
+```
+
 ## fonts-takao
 
 ```Dockerfile
@@ -161,6 +167,14 @@ For WSL
  rsync=3.1.3-8ubuntu0.4\
 ```
 
+## screen
+
+```Dockerfile
+ screen=4.8.0-1ubuntu0.1\
+```
+
+- without --no-install-recommends
+
 ## subversion
 
 ```Dockerfile
@@ -171,6 +185,16 @@ For WSL
 
 ```Dockerfile
  smbclient=2:4.13.17~dfsg-0ubuntu1.20.04.2\
+```
+
+## telnetd
+
+```Dockerfile
+ telnetd=0.17-41.2build1\
+```
+
+```bash
+/usr/sbin/in.telnetd -debug 23
 ```
 
 ## vim

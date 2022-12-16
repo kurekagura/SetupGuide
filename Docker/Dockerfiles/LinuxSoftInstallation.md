@@ -23,13 +23,22 @@ ENV DONT_PROMPT_WSL_INSTALL 1
 && mkdir ~/vscode-data-dir \
 && code --install-extension spadin.remote-x11@1.5.0 --no-sandbox --user-data-dir=/root/vscode-data-dir --extensions-dir=/.vscode/ext-default \
 && code --install-extension ms-python.python@2022.19.13141010 --user-data-dir=/root/vscode-data-dir --extensions-dir=/.vscode/ext-default \
-&& code --install-extension alefragnani.Bookmarks@13.3.1 --user-data-dir=/root/vscode-data-dir --extensions-dir=/.vscode/ext-defaul \
+&& code --install-extension alefragnani.Bookmarks@13.3.1 --user-data-dir=/root/vscode-data-dir --extensions-dir=/.vscode/ext-default \
 && code --install-extension oderwat.indent-rainbow@8.3.1 --user-data-dir=/root/vscode-data-dir --extensions-dir=/.vscode/ext-default \
 && echo "export DONT_PROMPT_WSL_INSTALL=1" >> ~/.bashrc \
 ```
 
 ```text
 /usr/bin/code -> /usr/share/code/bin/code*
+```
+
+```bash
+# code
+You are trying to start Visual Studio Code as a super user which isn't recommended.
+If this was intended, please add the argument `--no-sandbox` 
+and specify an alternate user data directory using the `--user-data-dir` argument.
+
+# code --user-data-dir=/root/vscode-data-dir --extensions-dir=/.vscode/ext-default --no-sandbox
 ```
 
 [Search Visual Studio Code extensions](https://marketplace.visualstudio.com/vscode)

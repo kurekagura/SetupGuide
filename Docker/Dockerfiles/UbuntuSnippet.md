@@ -95,6 +95,14 @@ includes `md4sum`
 gawk=1:5.0.1+dfsg-1\
 ```
 
+## gdebi
+
+```Dockerfile
+ gdebi=0.9.5.7+nmu3\
+```
+
+- [Ubuntuに拡張子がdebのパッケージをインストールする方法](https://kaworu.jpn.org/kaworu/2018-06-06-1.php)
+
 ## gedit
 
 ```Dockerfile
@@ -108,6 +116,12 @@ gawk=1:5.0.1+dfsg-1\
  git=1:2.25.1-1ubuntu3.6\
 ```
 
+## glmark2
+
+```Dockerfile
+ glmark2=2021.02-0ubuntu1~20.04.1\
+```
+
 ## gnome-terminal
 
 ```Dockerfile
@@ -116,13 +130,11 @@ gawk=1:5.0.1+dfsg-1\
  gnome-terminal=3.36.2-1ubuntu1~20.04\
 ```
 
-## gdebi (apt-get install -y \)
+## gosu
 
 ```Dockerfile
- gdebi=0.9.5.7+nmu3\
+ gosu=1.10-1ubuntu0.20.04.2\
 ```
-
-- [Ubuntuに拡張子がdebのパッケージをインストールする方法](https://kaworu.jpn.org/kaworu/2018-06-06-1.php)
 
 ## gpg ([The GNU Privacy Guard](https://en.wikipedia.org/wiki/GNU_Privacy_Guard))
 
@@ -143,6 +155,12 @@ For WSL
 
 ```Dockerfile
 && echo "export XDG_RUNTIME_DIR=/tmp/runtime-root">>~/.bashrc \
+```
+
+## nano
+
+```Dockerfile
+ nano=4.8-1ubuntu1\
 ```
 
 ## nfs
@@ -167,6 +185,12 @@ For WSL
  rsync=3.1.3-8ubuntu0.4\
 ```
 
+## samba
+
+```Dockerfile
+ samba=2:4.13.17~dfsg-0ubuntu1.20.04.2\
+```
+
 ## screen
 
 ```Dockerfile
@@ -187,6 +211,12 @@ For WSL
  smbclient=2:4.13.17~dfsg-0ubuntu1.20.04.2\
 ```
 
+## supervisor
+
+```Dockerfile
+ supervisor=4.1.0-1ubuntu1\
+```
+
 ## telnetd
 
 ```Dockerfile
@@ -203,6 +233,12 @@ For WSL
 vim=2:8.1.2269-1ubuntu5.9 \
 ```
 
+## vsftpd
+
+```Dockerfile
+ vsftpd=3.0.3-12\
+```
+
 ## xauth
 
 ```Dockerfile
@@ -216,6 +252,14 @@ vim=2:8.1.2269-1ubuntu5.9 \
 ```
 
 To install X11 client libraries and to test X11-client (xeyes, etc).
+
+## xinetd
+
+```Dockerfile
+ xinetd=1:2.3.15.3-1\
+```
+
+- without --no-install-recommends
 
 ## Troubles
 

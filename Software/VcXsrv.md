@@ -1,5 +1,9 @@
 # VcXsrv
 
+## HELP（引数など）を見る
+
+`vcxsrv.exe -h` で exeと同フォルダに `XWin.log` が作成され、それにオプションの説明がある（[wiki](https://sourceforge.net/p/vcxsrv/wiki/Using%20VcXsrv%20Windows%20X%20Server/)にも同様の内容が記載）。
+
 ## "Disable Access Control"オプション
 
 「アクセス制御をする」機能をどのように利用するのか？
@@ -38,6 +42,19 @@ VcxSrvの起動ショートカットを作る。
 ```text
 path\to\vcxsrv.exe -multiwindow -clipboard -auth "path\to\.Xauthority" 
 ```
+
+## オプション
+
+helpから抜粋。
+
+- -ac<br>
+    disable access control restrictions
+- -auth file<br>
+    select authorization file
+- -[no]wgl<br>
+    Enable the GLX extension to use the native Windows WGL interface for hardware-accelerated OpenGL
+- -swrastwgl<br>
+    Enable the GLX extension to use the native Windows WGL interface based on the swrast interface for accelerated OpenGL
 
 ## refs
 

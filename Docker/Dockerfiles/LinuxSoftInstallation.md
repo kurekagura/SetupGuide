@@ -20,12 +20,18 @@ ENV DONT_PROMPT_WSL_INSTALL 1
 # vscode
 && wget --quiet https://go.microsoft.com/fwlink/?LinkID=760868 -O ~/VSCodeInstaller.deb \
 && gdebi --non-interactive ~/VSCodeInstaller.deb \
-&& mkdir ~/vscode-data-dir \
-&& code --install-extension spadin.remote-x11@1.5.0 --no-sandbox --user-data-dir=/root/vscode-data-dir --extensions-dir=/.vscode/ext-default \
-&& code --install-extension ms-python.python@2022.19.13141010 --user-data-dir=/root/vscode-data-dir --extensions-dir=/.vscode/ext-default \
-&& code --install-extension alefragnani.Bookmarks@13.3.1 --user-data-dir=/root/vscode-data-dir --extensions-dir=/.vscode/ext-default \
-&& code --install-extension oderwat.indent-rainbow@8.3.1 --user-data-dir=/root/vscode-data-dir --extensions-dir=/.vscode/ext-default \
+&& mkdir -p ~/.config/Code \
+&& code --install-extension spadin.remote-x11@1.5.0 --no-sandbox --user-data-dir=~/.config/Code --extensions-dir=/.vscode/ext-default \
+&& code --install-extension ms-python.python@2022.19.13141010 --user-data-dir=~/.config/Code --extensions-dir=/.vscode/ext-default \
+&& code --install-extension alefragnani.Bookmarks@13.3.1 --user-data-dir=~/.config/Code --extensions-dir=/.vscode/ext-default \
+&& code --install-extension oderwat.indent-rainbow@8.3.1 --user-data-dir=~/.config/Code --extensions-dir=/.vscode/ext-default \
 && echo "export DONT_PROMPT_WSL_INSTALL=1" >> ~/.bashrc \
+```
+
+Other usefull extensions.
+
+```text
+ms-ceintl.vscode-language-pack-ja@1.74.12140928
 ```
 
 ```text
@@ -38,8 +44,15 @@ You are trying to start Visual Studio Code as a super user which isn't recommend
 If this was intended, please add the argument `--no-sandbox` 
 and specify an alternate user data directory using the `--user-data-dir` argument.
 
-# code --user-data-dir=/root/vscode-data-dir --extensions-dir=/.vscode/ext-default --no-sandbox
+# code --user-data-dir=/root/.config/Code --extensions-dir=/.vscode/ext-default --no-sandbox
 ```
+
+```Dockerfile
+&& echo echo 'code(){ /usr/bin/code --user-data-dir=/root/.config/Code --extensions-dir=/.vscode/ext-default --no-sandbox "$@";}' >> ~/.bashrc \
+&& echo "export -f code" >> ~/.bashrc \
+```
+
+vscode linux default user's setting is stored in `$HOME/.config/Code/User/settings.json`.
 
 [Search Visual Studio Code extensions](https://marketplace.visualstudio.com/vscode)
 

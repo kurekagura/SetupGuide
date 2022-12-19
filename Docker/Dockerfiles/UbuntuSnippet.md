@@ -261,6 +261,12 @@ To install X11 client libraries and to test X11-client (xeyes, etc).
 
 - without --no-install-recommends
 
+## xterm
+
+```Dockerfile
+ xterm=353-1ubuntu1.20.04.2
+```
+
 ## Troubles
 
 ### Trouble 1 - httpsからのwgetが失敗する

@@ -20,6 +20,12 @@ useradd -m -N -s /bin/bash -p <crypt関数で暗号化したパスワード> tar
 perl -e "print(crypt('暗号化したいパスワード', '英数字2文字'));"
 ```
 
+perlのcryptの引数（16文字と2文字）をランダムに生成する（出力をスペースで区切る）。
+
+```bash
+cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 18 | head -n 1 | cut -c 1-16,17-18 --output-delimiter=" "
+```
+
 [refs]
 
 - [man useradd](https://linuxjm.osdn.jp/html/shadow/man8/useradd.8.html)

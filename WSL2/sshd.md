@@ -84,7 +84,7 @@ wsl -d Ubuntu-20.04 -e hostname -I
 パスワード認証で確認
 
 ```cmd
-ssh <Ubuntuのユーザー>@<ホスト名orホストのIPアドレス>
+ssh <Ubuntuのユーザー>@<ホスト名orIPアドレス>
 # where ssh
 # C:\Windows\System32\OpenSSH\ssh.exe
 ```
@@ -124,7 +124,7 @@ Your public key has been saved in /home/taro/.ssh/id_rsa.pub
 先ほど構成したパスワード認証SSH経由で、作成した公開鍵をサーバー側へコピーする。
 
 ```bash
->ssh-copy-id <Ubuntuのユーザー>@<ホスト名orホストのIPアドレス>
+>ssh-copy-id <Ubuntuのユーザー>@<ホスト名orIPアドレス>
 
 /usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/taro/.ssh/id_rsa.pub"
 /usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
@@ -163,7 +163,7 @@ Your public key has been saved in C:\Users\taro/.ssh/id_rsa.pub.
 先ほど構成したパスワード認証SSH経由で、作成した公開鍵をサーバー側へコピーする。Windows版ssh-copy-idは提供されていないため、以下のPowerShellを実行する（<>を適切に設定）。
 
 ```pwsh
-cat ~/.ssh/id_rsa.pub | ssh <Ubuntuのユーザー>@<ホスト名orホストのIPアドレス> `
+cat ~/.ssh/id_rsa.pub | ssh <Ubuntuのユーザー>@<ホスト名orIPアドレス> `
 "mkdir -p ~/.ssh && chmod 700 ~/.ssh && `
 cat >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys"
 ```
@@ -181,6 +181,14 @@ docker run -v ""${env:USERPROFILE}\.ssh"":""/root/.ssh"" -it tmpimage /bin/bash
 ### パスワード認証方式の無効化
 
 公開鍵認証方式を構成後はパスワード認証方式を無効化しておく。
+
+## rsyncとの関係
+
+rsyncd.confとは関係がなく利用できる（すなわちrsync daemonの起動も不要？）
+
+```bash
+rsync -av -e ssh <Ubuntuのユーザー>@<ホスト名orIPアドレス>:/mnt/o/mytmp /root/mytmp/
+```
 
 ## [refs]
 

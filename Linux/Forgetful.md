@@ -42,15 +42,50 @@ echo $SHELL
 
 - rootのみ可能
 - `/etc/passwd` `/etc/shadow` を使っている場合。
+- 対話的に変更するには、`passwd` コマンド。
 
 ```bash
 echo "root:new password" | chpasswd
 ```
 
-対話的に変更するには、`passwd` コマンド。
+- --encrypted <暗号化パスワード>
+
+```bash
+printf 'taro:$6$<暗号化パスワード>' | chpasswd --encrypted
+
+# $6$ ハッシュ化にSHA-512を使っていることを示す。
+# /etc/shadowで確認できる。
+```
+
+[refs]
+
+- [ユーザ作成・追加の方法](https://www.server-memo.net/centos-settings/system/useradd.html)
+- [メモ：シェルスクリプトでパスワードを設定するにはchpasswdが使えるかも](https://notchained.hatenablog.com/entry/2016/09/03/130454)
+- [OpenSSLでSHA512のPASSWORDを生成する](https://matoken.org/blog/2019/03/15/generate-a-sha512-password-with-openssl/)
+
+## chsh
+
+ログインシェルを変更する。対象ユーザーを指定することもできる。
+
+```sh
+chsh -s /bin/bash taro
+```
+
+## cut
+
+文字列を区切り文字で切り出す。
+
+```sh
+#ファイル末尾のユーザーを切り出す
+tail /etc/passwd -n 1|cut -d":" -f 1
+```
 
 ## kill
 
 ```bash
 kill -TERM pid
 ```
+
+## time
+
+コマンドの処理時間を計る。

@@ -46,6 +46,12 @@ curl --silent --insecure https://repo.anaconda.com/archive/Anaconda3-2022.10-Lin
 
 - [How to ignore invalid and self signed ssl connection errors with curl](https://www.cyberciti.biz/faq/how-to-curl-ignore-ssl-certificate-warnings-command-option/)
 
+## build-essential
+
+```Dockerfile
+ build-essential=12.8ubuntu1\
+```
+
 ## cifs-utils
 
 Can mount using cifs-utils only (samba-client not required).
@@ -211,6 +217,12 @@ For WSL
  smbclient=2:4.13.17~dfsg-0ubuntu1.20.04.2\
 ```
 
+## sudo
+
+```Dockerfile
+ sudo=1.8.31-1ubuntu1.2\
+```
+
 ## supervisor
 
 ```Dockerfile
@@ -264,7 +276,7 @@ To install X11 client libraries and to test X11-client (xeyes, etc).
 ## xterm
 
 ```Dockerfile
- xterm=353-1ubuntu1.20.04.2
+ xterm=353-1ubuntu1.20.04.2\
 ```
 
 ## Troubles

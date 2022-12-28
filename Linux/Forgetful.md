@@ -101,6 +101,16 @@ tail /etc/passwd -n 1|cut -d":" -f 1
 kill -TERM pid
 ```
 
+## ps
+
+- -A, -e : all processes
+- -f : full-format, including command lines
+- --help a : 全ヘルプ参照
+
+```sh
+ps -Af
+```
+
 ## tee
 
 標準エラー出力2を標準出力1へとリダイレクトし、この標準出力をパイプでteeの入力とする（-aは追記）。

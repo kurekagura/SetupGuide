@@ -229,6 +229,12 @@ For WSL
  supervisor=4.1.0-1ubuntu1\
 ```
 
+## telnet
+
+```Dockerfile
+ telnet=0.17-41.2build1\
+```
+
 ## telnetd
 
 ```Dockerfile

@@ -44,11 +44,12 @@ You are trying to start Visual Studio Code as a super user which isn't recommend
 If this was intended, please add the argument `--no-sandbox` 
 and specify an alternate user data directory using the `--user-data-dir` argument.
 
-# code --user-data-dir=/root/.config/Code --extensions-dir=/.vscode/ext-default --no-sandbox
+# code --user-data-dir=/root/.config/Code --extensions-dir=/root/.vscode/extensions --no-sandbox
 ```
 
 ```Dockerfile
-&& echo echo 'code(){ /usr/bin/code --user-data-dir=/root/.config/Code --extensions-dir=/.vscode/ext-default --no-sandbox "$@";}' >> ~/.bashrc \
+# The case you want to share extensions.
+&& echo 'code(){ /usr/bin/code --extensions-dir=/.vscode/ext-default --no-sandbox "$@";}' >> ~/.bashrc \
 && echo "export -f code" >> ~/.bashrc \
 ```
 
@@ -57,6 +58,12 @@ vscode linux default user's setting is stored in `$HOME/.config/Code/User/settin
 [Search Visual Studio Code extensions](https://marketplace.visualstudio.com/vscode)
 
 Click "Download Extension" to know the name of the extension. Use @ to separate its name and version.
+
+code needs three writable folders:
+
+1. --user-data-dir=(default:~/.config/Code)
+1. --extensions-dir=(default:~/.vscode/extensions)
+1. /tmp/runtime-root/ (e.g., mkdir -m 1770 /tmp/runtime-root)
 
 [refs]
 

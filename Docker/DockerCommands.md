@@ -37,6 +37,14 @@ echo "`id -n -u`:x:`id -n -u`:0::/root_group:/bin/bash" >> /etc/passwd
 echo "`id -n -u`::19354:0:99999:7:::" >> /etc/shadow
 ```
 
+## run -v
+
+```PowerShell
+docker run -v ""O:\home\taro"":""/home/taro"" -d image
+```
+
+- ""path""（PowerShell）
+
 ## run --gpus all
 
 ```PowerShell

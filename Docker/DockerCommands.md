@@ -5,7 +5,7 @@
 Detach(-d)して、Runnning状態とする。即座にExitedにならないよう（Docker DesktopのTerminalからログインできるよう）、[ENTRYPOINT]や[CMD]で呼び出す最後のコマンドでブロッキングされるようにしておく。
 
 ```PowerShell
-docker run --name cont -d image
+docker run -d image
 ```
 
 ## run -u
@@ -13,7 +13,7 @@ docker run --name cont -d image
 UID/GIDはint32の最大値2^31-1( 2147483647 )のため、0-2147483647を指定できる。
 
 ```PowerShell
-docker run --name cont -u 2147483647 -d image
+docker run -u 2147483647 -d image
 ```
 
 存在しないuidを指定した場合、idコマンドの結果は以下のようになるものの、/etc/passwd,shadow,group にはレコードはない。
@@ -42,8 +42,7 @@ echo "`id -n -u`::19354:0:99999:7:::" >> /etc/shadow
 ```PowerShell
 docker run `
     --gpus all `
-    --name=con-gpu `
     --ulimit memlock=-1 --ulimit stack=8388608 `
     --ipc=host `
-    -d -it img-gpu
+    -d -it image
 ```

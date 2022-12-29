@@ -1,5 +1,26 @@
 # Linuxについて忘れてた事
 
+## /tmp
+
+/tmpにはスティッキービットが立っている。
+
+```sh
+$ ls -ld /tmp
+drwxrwxrwt 1 root root 4096 Dec 28 14:56 /tmp
+```
+
+スティッキービットを立てるには
+
+```sh
+chmod o+u <ディレクトリ>
+# or
+chmod 1777 <ディレクトリ>
+```
+
+[Docker]
+
+ファイル作成は行えるが、ディレクトリは不可のようだ。--tmpfsを使う。
+
 ## /etc/skel/
 
 .bashrc等のテンプレートがある。

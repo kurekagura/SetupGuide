@@ -45,6 +45,18 @@ docker run -v ""O:\home\taro"":""/home/taro"" -d image
 
 - ""path""（PowerShell）
 
+## run --tmpfs
+
+/tmpにはスティッキービットが立っている。コンテナ上では、ファイルは作成できるものの、ディレクトリは作成できない（理由は不明）。--tmpfsを使うとこの問題を回避できる。
+
+```sh
+$ ls -ld /tmp
+drwxrwxrwt 1 root root 4096 Dec 28 14:56 /tmp
+
+```PowerShell
+docker run --tmpfs /tmp -d image
+```
+
 ## run --gpus all
 
 ```PowerShell

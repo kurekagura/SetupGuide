@@ -27,6 +27,13 @@ Dockerfile（build）の段階で、以下のファイルのパーミッショ�
 RUN chown root:root /usr/lib/telnetlogin && chmod 4755 /usr/lib/telnetlogin
 ```
 
+```bash
+# インストール直後
+-rwsr-xr-- 1 root telnetd 14744 Mar 23  2020 /usr/lib/telnetlogin
+# 変更後
+-rwsr-xr-- 1 root root 14744 Mar 23  2020 /usr/lib/telnetlogin
+```
+
 ## 起動と管理
 
 コンテナ上で以下のコマンドで起動できる。但し、telnetクライアントから一度は接続できるものの、セッションが終了した時点で、in.telnetdも終了してしまう。

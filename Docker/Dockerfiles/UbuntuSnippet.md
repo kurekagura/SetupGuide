@@ -285,6 +285,14 @@ To install X11 client libraries and to test X11-client (xeyes, etc).
  xterm=353-1ubuntu1.20.04.2\
 ```
 
+## TIPS
+
+### 先にインストールしておいてバージョンを調べる
+
+```
+apt list --installed
+```
+
 ## Troubles
 
 ### Trouble 1 - httpsからのwgetが失敗する

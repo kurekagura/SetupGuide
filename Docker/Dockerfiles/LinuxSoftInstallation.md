@@ -83,6 +83,7 @@ code needs three writable folders:
 
 [refs]
 
+- [Other's versions](https://repo.anaconda.com/miniconda/)
 - [【Dockerfile】DockerにConda環境を構築し、仮想環境をActivateする](https://qiita.com/kuboko-jp/items/6388c186e16028d3e699)
 
 ## Anaconda

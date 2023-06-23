@@ -66,3 +66,16 @@ docker run `
     --ipc=host `
     -d -it image
 ```
+
+## run -itd
+
+デタッチ起動
+```
+docker run --name cnt_hoge -itd img_hoge
+```
+
+GPU利用でデタッチ起動（4194304=4GB）
+```
+docker run --name cnt_hoge -itd --gpus all --shm-size=2g --ulimit memlock=-1 --ulimit stack=4194304 img_hoge
+```
+イメージは最後でなければならない。

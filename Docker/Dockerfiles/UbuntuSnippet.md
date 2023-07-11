@@ -285,6 +285,22 @@ To install X11 client libraries and to test X11-client (xeyes, etc).
  xterm=353-1ubuntu1.20.04.2\
 ```
 
+## TIPS
+
+### 先にインストールしておいてバージョンを調べる
+
+```
+apt list --installed
+```
+
+### タイムゾーンによる対話モードの回避
+
+```
+RUN DEBIAN_FRONTEND=noninteractive TZ=UTC apt-get install -y libglib2.0-0=2.64.6-1~ubuntu20.04.6
+```
+
+全体へ影響する環境変数TZの設定はDocker非推奨のため、上記のようにするのが正解。
+
 ## Troubles
 
 ### Trouble 1 - httpsからのwgetが失敗する

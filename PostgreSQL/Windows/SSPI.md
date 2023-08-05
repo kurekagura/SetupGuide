@@ -24,12 +24,25 @@ MapForSSPI    winuser1@pc1    winuser1
 MapForSSPI    winuser1@pc1    postgres
 ```
 
-ASP.NET Core IdentiyのWebアプリをVSから実行（アカウントwinuser1）、接続確認した接続文字列。
+ASP.NET Core IdentiyのWebアプリをVSから実行（アカウント: winuser1）、接続確認した接続文字列。
 
 ```json
 "ConnectionStrings": {
   "DefaultConnection": "Host=localhost;Port=5432;Database=WebDB;Integrated Security=True;Username=postgres"
 },
+```
+
+winuser1というロールをPgSQLに作成しておくと、接続文字列の`Username=winuser1`を省略できる。
+
+```sql
+CREATE ROLE "winuser1" WITH
+  LOGIN
+  SUPERUSER
+  CREATEDB
+  CREATEROLE
+  INHERIT
+  REPLICATION
+  CONNECTION LIMIT -1;
 ```
 
 ## 参考

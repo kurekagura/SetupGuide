@@ -59,6 +59,7 @@ O:\sw\neo4j-5.24.2>bin\neo4j.bat console
 
 ```cmd
 bin\neo4j windows-service install
+bin\neo4j start
 ```
 
 サービス名neo4jとして登録される（services.msc）
@@ -79,8 +80,13 @@ bin\neo4j windows-service uninstall
 bin\neo4j windows-service update
 # 再起動
 bin\neo4j restart
-# 以下でも同じ？
-sc restart neo4j
+```
+
+管理者権限コンソールで以下でもOKのようだが、UACダイアグがでるので↑のほうが便利。
+
+```cmd
+sc stop neo4j
+sc start neo4j
 ```
 
 ## [Windows PowerShell module](https://neo4j.com/docs/operations-manual/current/installation/windows/#powershell)

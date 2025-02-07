@@ -160,3 +160,7 @@ python detect.py --weights yolov7.pt --conf 0.25 --img-size 640 --source inferen
 runs\detect\exp10\horses.jpg に推論結果が出力される
 
 ## CUDA11.8(11.xの最新)
+
+## 参考
+
+[物体検出，姿勢推定の実行（YOLOv7，PyTorch，Python を使用）（Windows 上）](https://www.kkaneko.jp/ai/win/yolov7.html)
